@@ -1,12 +1,10 @@
-# require "java"
-# 
-# java_import javax.servlet
-# java_import javax.servlet.http
-# 
-# class HelloWorld < HttpServlet
-#   def do_get(request, response)
-#     response.writer.println "Hello World!"
-#   end
-# end
+# I get an HTTP 405: HTTP method GET is not supported by this URL
 
-puts "HELLO JRUBY WORLD!!!"
+java_import javax.servlet.http.HttpServlet
+
+class HelloWorld < HttpServlet
+  
+  def doGet(request, response)
+    response.writer.println "Hello World!"
+  end
+end

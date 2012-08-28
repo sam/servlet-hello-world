@@ -18,7 +18,7 @@ import org.jruby.javasupport.JavaEmbedUtils.EvalUnit;
 public class HarborServlet extends HttpServlet {
   
   private ScriptingContainer container;
-  private EvalUnit ruby_unit;
+  private HttpServlet servlet;
   
   @Override
   public void init() {
@@ -27,55 +27,15 @@ public class HarborServlet extends HttpServlet {
     container = new ScriptingContainer();
     container.getProvider().setLoadPaths(loadPaths);
   
-    try {
-      File directory = new File (".");
-      System.out.println ("Current directory's canonical path: " 
-        + directory.getCanonicalPath());
-    } catch(IOException e) {
-      System.out.println("Exceptione is =" + e.getMessage());
-    }
-
-        
-    ruby_unit = container.parse(PathType.CLASSPATH, "src/main/ruby/hello_world.rb");
-  }
-  
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    container.setWriter(out);
-    try {
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet ParsenRunServlet</title>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h3>Servlet ParsenRunServlet at " + request.getContextPath() + "</h3><div>");
-        
-      ruby_unit.run();
-      
-      out.println("</body>");
-      out.println("</html>");
-    } finally {
-      out.close();
-    }
+    container.runScriptlet("require 'pathname'");
+    container.runScriptlet("require(Pathname::pwd + 'src/main/ruby/hello_world')");
+    servlet = (HttpServlet) container.runScriptlet("HelloWorld.new");
   }
   
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
   throws ServletException, IOException {
-    processRequest(request, response);
-  }
-  
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-  throws ServletException, IOException {
-    processRequest(request, response);
-  }
-  
-  @Override
-  public String getServletInfo() {
-    return "Parse-once-eval-many-times Sample";
+    servlet.service(request, response);
   }
   
 }
