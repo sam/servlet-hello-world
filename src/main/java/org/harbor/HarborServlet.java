@@ -26,9 +26,17 @@ public class HarborServlet extends HttpServlet {
     List<String> loadPaths = Arrays.asList(classpath.split(File.pathSeparator));
     container = new ScriptingContainer();
     container.getProvider().setLoadPaths(loadPaths);
-    
-    String filename = "ruby/hello_world.rb";
-    ruby_unit = container.parse(PathType.CLASSPATH, filename);
+  
+    try {
+      File directory = new File (".");
+      System.out.println ("Current directory's canonical path: " 
+        + directory.getCanonicalPath());
+    } catch(IOException e) {
+      System.out.println("Exceptione is =" + e.getMessage());
+    }
+
+        
+    ruby_unit = container.parse(PathType.CLASSPATH, "src/main/ruby/hello_world.rb");
   }
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +50,7 @@ public class HarborServlet extends HttpServlet {
       out.println("<title>Servlet ParsenRunServlet</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h3>Servlet ParsenRunServlet at " + 
-        request.getContextPath() + "</h3><div>");
+      out.println("<h3>Servlet ParsenRunServlet at " + request.getContextPath() + "</h3><div>");
         
       ruby_unit.run();
       

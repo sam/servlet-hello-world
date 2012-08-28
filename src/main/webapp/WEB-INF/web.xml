@@ -23,11 +23,7 @@
       <display-name>Harbor</display-name>
       <servlet-name>HarborServlet</servlet-name>
       <servlet-class>org.harbor.HarborServlet</servlet-class>
-      <init-param>
-        <param-name>sleep-time-in-seconds</param-name>
-        <param-value>10</param-value>
-      </init-param>
-      <load-on-startup>1</load-on-startup>
+      <!-- <load-on-startup>1</load-on-startup> -->
     </servlet>
     
     <servlet-mapping>
