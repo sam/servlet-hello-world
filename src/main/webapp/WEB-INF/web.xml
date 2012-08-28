@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
     <!-- <context-param>
@@ -18,25 +18,11 @@
         <param-name>gem.home</param-name>
         <param-value>WEB-INF/gems</param-value>
     </context-param>
-
-    <!-- <filter>
-        <filter-name>RackFilter</filter-name>
-        <filter-class>org.jruby.rack.RackFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>RackFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <listener>
-        <listener-class>org.jruby.rack.RackServletContextListener</listener-class>
-    </listener> -->
     
     <servlet>
-      <display-name>HelloWorld</display-name>
-      <servlet-name>HelloWorld</servlet-name>
-      <servlet-class>HelloWorld</servlet-class>
+      <display-name>Harbor</display-name>
+      <servlet-name>HarborServlet</servlet-name>
+      <servlet-class>org.harbor.HarborServlet</servlet-class>
       <init-param>
         <param-name>sleep-time-in-seconds</param-name>
         <param-value>10</param-value>
@@ -45,8 +31,8 @@
     </servlet>
     
     <servlet-mapping>
-      <servlet-name>HelloWorld</servlet-name>
-      <url-pattern>/hello</url-pattern>
+      <servlet-name>HarborServlet</servlet-name>
+      <url-pattern>/harbor</url-pattern>
     </servlet-mapping>
 
 </web-app>
