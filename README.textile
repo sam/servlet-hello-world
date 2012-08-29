@@ -1,6 +1,6 @@
 h1. servlet-hello-world
 
-An example of a Servlet app you can run inside a Servlet Container.
+An example of a mixed Java/Ruby Servlet app you can run inside a Servlet Container.
 
 h2. Running
 
