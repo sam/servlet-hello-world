@@ -6,23 +6,27 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.jruby.embed.PathType;
 import org.jruby.embed.ScriptingContainer;
 import org.jruby.javasupport.JavaEmbedUtils.EvalUnit;
 
-public class HarborServlet extends HttpServlet {
+public class HarborServlet implements Servlet {
   
+  private transient ServletConfig config;
   private ScriptingContainer container;
   private HttpServlet servlet;
   
   @Override
-  public void init() {
-    String classpath = getServletContext().getRealPath("/WEB-INF/classes");
+  public void init(ServletConfig config) {
+    this.config = config;
+    String classpath = config.getServletContext().getRealPath("/WEB-INF/classes");
     List<String> loadPaths = Arrays.asList(classpath.split(File.pathSeparator));
     container = new ScriptingContainer();
     container.getProvider().setLoadPaths(loadPaths);
@@ -33,9 +37,20 @@ public class HarborServlet extends HttpServlet {
   }
   
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void service(ServletRequest request, ServletResponse response)
   throws ServletException, IOException {
     servlet.service(request, response);
   }
   
+  @Override
+  public void destroy() { }
+  
+  @Override
+  public String getServletInfo() {
+    return "HarborServlet";
+  }
+  
+  public ServletConfig getServletConfig() {
+    return config;
+  }
 }

@@ -28,7 +28,7 @@
     
     <servlet-mapping>
       <servlet-name>HarborServlet</servlet-name>
-      <url-pattern>/harbor</url-pattern>
+      <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
