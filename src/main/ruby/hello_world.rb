@@ -1,10 +1,12 @@
-# I get an HTTP 405: HTTP method GET is not supported by this URL
-
 java_import javax.servlet.http.HttpServlet
 
 class HelloWorld < HttpServlet
-  
+
   def doGet(request, response)
-    response.writer.println "Hello World!"
+    writer = response.writer
+    writer.println "Hello World!"
+    if id = request.get_parameter("id")
+      writer.println "The value of \"id\" is #{id.inspect}"
+    end
   end
 end
