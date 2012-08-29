@@ -8,6 +8,10 @@ You'll need Java and Maven installed. Then you can just run:
 
 bc. mvn jetty:run-war
 
+Once you see the @[INFO] Started Jetty Server@ line (which takes about thirty seconds for me), you can
+navigate to http://localhost:8080/ in your web browser. The first hit may take around ten seconds as the
+servlet is actually initialized for the first time.
+
 h2. Results
 
 I'm trying to convert a Ruby web-framework away from the Rack API, and instead run it directly as a Servlet. 
