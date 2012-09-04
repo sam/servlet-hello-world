@@ -2,7 +2,6 @@ package org.harbor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,9 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 
-import org.jruby.embed.PathType;
 import org.jruby.embed.ScriptingContainer;
-import org.jruby.javasupport.JavaEmbedUtils.EvalUnit;
 
 public class HarborServlet implements Servlet {
   
@@ -29,7 +26,7 @@ public class HarborServlet implements Servlet {
     String classpath = config.getServletContext().getRealPath("/WEB-INF/classes");
     List<String> loadPaths = Arrays.asList(classpath.split(File.pathSeparator));
     container = new ScriptingContainer();
-    container.getProvider().setLoadPaths(loadPaths);
+    container.setLoadPaths(loadPaths);
   
     container.runScriptlet("require 'pathname'");
     container.runScriptlet("require(Pathname::pwd + 'src/main/ruby/hello_world')");
