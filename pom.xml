@@ -1,108 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- This is basically a direct copy of https://raw.github.com/marekjelen/jruby-maven/master/pom.xml -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.sam</groupId>
-    <artifactId>servlet-hello-world</artifactId>
-    <version>1.0</version>
-    <packaging>war</packaging>
-
-    <repositories>
-
-        <repository>
-            <id>rubygems-proxy</id>
-            <name>Rubygems Proxy</name>
-            <url>http://rubygems-proxy.torquebox.org/releases</url>
-            <layout>default</layout>
-        </repository>
-
-    </repositories>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>rubygems</groupId>
-            <artifactId>bundler</artifactId>
-            <version>1.1.3</version>
-            <type>gem</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jruby</groupId>
-            <artifactId>jruby-complete</artifactId>
-            <version>1.7.0.preview2</version>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.mortbay.jetty</groupId>
-          <artifactId>servlet-api</artifactId>
-          <version>3.0.20100224</version>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-      <resources>
-        <resource>
-          <directory>src/main/resources</directory>
-        </resource>
-        <resource>
-          <directory>src/main/ruby</directory>
-        </resource>
-      </resources>
-        <plugins>
-
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.3.v20120416</version>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>${project.build.directory}/rubygems</directory>
-                            <targetPath>WEB-INF/gems</targetPath>
-                        </resource>
-                        <resource>
-                            <directory>.</directory>
-                            <includes>
-                                <include>Gemfile*</include>
-                            </includes>
-                            <targetPath>WEB-INF</targetPath>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>de.saumya.mojo</groupId>
-                <artifactId>bundler-maven-plugin</artifactId>
-                <version>0.29.0</version>
-                <configuration>
-                    <local>false</local>
-                    <quiet>false</quiet>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install-gem</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>install</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-
-    </build>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.sam</groupId>
+  <artifactId>servlet-hello-world</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <invoker.skip>true</invoker.skip>
+    <maven.version>3.0.3</maven.version>
+    <jruby.version>1.7.0.preview2</jruby.version>
+    <jetty.version>8.1.3.v20120416</jetty.version>
+    <war.version>2.1.1</war.version>
+    <jar.version>2.3.1</jar.version>
+    <bundler.version>1.1.3</bundler.version>
+  </properties>
+  <repositories>
+    <repository>
+      <id>rubygems-proxy</id>
+      <name>Rubygems Proxy</name>
+      <url>http://rubygems-proxy.torquebox.org/releases</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>rubygems</groupId>
+      <artifactId>bundler</artifactId>
+      <version>1.1.3</version>
+      <type>gem</type>
+    </dependency>
+    <dependency>
+      <groupId>org.jruby</groupId>
+      <artifactId>jruby-complete</artifactId>
+      <version>1.7.0.preview2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>3.0.20100224</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/ruby</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>8.1.3.v20120416</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>${project.build.directory}/rubygems</directory>
+              <targetPath>WEB-INF/gems</targetPath>
+            </resource>
+            <resource>
+              <directory>.</directory>
+              <includes>
+                <include>Gemfile*</include>
+              </includes>
+              <targetPath>WEB-INF</targetPath>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>de.saumya.mojo</groupId>
+        <artifactId>bundler-maven-plugin</artifactId>
+        <version>0.29.0</version>
+        <configuration>
+          <local>false</local>
+          <quiet>false</quiet>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install-gem</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>install</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>de.saumya.mojo</groupId>
+        <artifactId>gem-maven-plugin</artifactId>
+        <version>0.29.0</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
