@@ -4,7 +4,7 @@ An example of a mixed Java/Ruby Servlet app you can run inside a Servlet Contain
 
 h2. Running
 
-You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why), Maven and "Buildr":https://github.com/apache/buildr (@gem install buildr@) installed. Then you can just run:
+You'll need "OpenJDK7":http://www.oracle.com/technetwork/java/javase/downloads/jdk-7u4-downloads-1591156.html (it blows up on Java6 and I haven't bothered to find out why), "Maven":http://maven.apache.org/download.html and "Buildr":https://github.com/apache/buildr (@gem install buildr@) installed. Then you can just run:
 
 bc. buildr jetty
 
