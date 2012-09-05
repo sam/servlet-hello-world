@@ -8,7 +8,7 @@ You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find 
 
 bc. mvn jetty:run-war
 
-Once you see the @[INFO] Started Jetty Server@ line (which takes about thirty seconds for me), you can
+Once you see the @[INFO] Started Jetty Server@ line (which takes about ten seconds for me), you can
 navigate to http://localhost:8080/ in your web browser. The first hit may take around ten seconds as the
 servlet is actually initialized for the first time.
 
