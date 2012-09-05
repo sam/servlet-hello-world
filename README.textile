@@ -4,11 +4,11 @@ An example of a mixed Java/Ruby Servlet app you can run inside a Servlet Contain
 
 h2. Running
 
-You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why) and Maven installed. Then you can just run:
+You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why) and Maven and Buildr (@gem install buildr@) installed. Then you can just run:
 
-bc. mvn jetty:run-war
+bc. buildr jetty
 
-Once you see the @[INFO] Started Jetty Server@ line (which takes about ten seconds for me), you can
+Once you see the @Jetty started@ line (which takes about ten seconds for me), you can
 navigate to http://localhost:8080/ in your web browser.
 
 h2. Results
