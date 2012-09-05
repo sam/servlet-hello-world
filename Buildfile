@@ -1,3 +1,8 @@
+require "buildr/jetty"
+
+Project.local_task :jetty
+
+# org.eclipse.jetty:jetty-server:jar:8.1.5.v20120716
 repositories.remote << "http://mirrors.ibiblio.org/pub/mirrors/maven2"
 repositories.remote << "http://repo1.maven.org/maven2/"
 
@@ -27,7 +32,12 @@ define "hello-world-servlet" do
     spec.add_dependency "buildr"
   end
   
-  install do
-    addon package(:gem)
+  task "jetty" => [ package(:war), jetty.use ] do |task|
+    jetty.deploy("http://localhost:8080", task.prerequisites.first)
+    puts 'Press CTRL-C to stop Jetty'
+    trap 'SIGINT' do
+      jetty.stop
+    end
+    Thread.stop
   end
 end
