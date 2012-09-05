@@ -4,17 +4,15 @@ An example of a mixed Java/Ruby Servlet app you can run inside a Servlet Contain
 
 h2. Running
 
-You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why) and Maven and Buildr (@gem install buildr@) installed. Then you can just run:
+You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why), Maven and "Buildr":https://github.com/apache/buildr (@gem install buildr@) installed. Then you can just run:
 
 bc. buildr jetty
 
-Once you see the @Jetty started@ line (which takes about ten seconds for me), you can
-navigate to http://localhost:8080/ in your web browser.
+Once you see the @Jetty started@ line (which takes about ten seconds for me), you can navigate to "localhost:8080":http://localhost:8080/ in your web browser.
 
 h2. Results
 
-I'm trying to convert a Ruby web-framework away from the Rack API, and instead run it directly as a Servlet. 
-Right now your typical JRuby web-application looks like this:
+I'm trying to convert a Ruby web-framework away from the Rack API, and instead run it directly as a Servlet. Right now your typical JRuby web-application looks like this:
 
 bq. Client-Request -> Mizuno (Jetty) -> JRuby-Rack (Servlet) -> Rack API -> Ruby Web Application
 
@@ -24,9 +22,6 @@ bq. Client-Request -> Jetty -> Ruby Web Application
 
 The rest is all pure overhead, translating one platform's standard Web Application Server API to another's.
 
-This application gets *2805* requests-per-second on my work laptop. For comparison, a HelloWorld Rack
-application run by Mizuno (Jetty) gets *460* requests-per-second. So removing the overhead makes the example over
-six times faster.
+This application gets *2805* requests-per-second on my work laptop. For comparison, a HelloWorld Rack application run by Mizuno (Jetty) gets *460* requests-per-second. So removing the overhead makes the example over six times faster.
 
-That gap is obviously going to narrow as the application grows to actually execute real-world code. Still, it's an
-interesting benchmark and a promising optimization.
+That gap is obviously going to narrow as the application grows to actually execute real-world code. Still, it's an interesting benchmark and a promising optimization.
