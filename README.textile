@@ -4,7 +4,7 @@ An example of a mixed Java/Ruby Servlet app you can run inside a Servlet Contain
 
 h2. Running
 
-You'll need Java and Maven installed. Then you can just run:
+You'll need Java (OpenJDK7, it blows up on Java6 and I haven't bothered to find out why) and Maven installed. Then you can just run:
 
 bc. mvn jetty:run-war
 
